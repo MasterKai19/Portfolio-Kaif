@@ -38,9 +38,9 @@
         }
 
         body {
-            background-color: #f4f1e6;
+            background-color: #0a0a0a;
             font-family: 'RetroSerif', serif;
-            color: var(--ink-black);
+            color: #f0ede0;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
@@ -104,7 +104,7 @@
             max-width: 480px;
             font-family: 'RetroSerif', serif;
             letter-spacing: -0.5px;
-            color: #444;
+            color: #aaa8a0;
         }
 
         .cta-group {
@@ -115,27 +115,27 @@
 
         .btn {
             display: inline-block;
-            background: var(--ink-black);
-            color: #f4f1e6;
+            background: #f0ede0;
+            color: #0a0a0a;
             padding: 1rem 2rem;
             font-size: 1.25rem;
             text-decoration: none;
             border-radius: 8px;
             font-family: 'RetroSerif', serif;
-            border: 2px solid var(--ink-black);
+            border: 2px solid #f0ede0;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .btn:hover {
             background: transparent;
-            color: var(--ink-black);
+            color: #f0ede0;
         }
 
         .price-tag {
             font-family: 'RetroSerif', serif;
             font-size: 1.1rem;
-            color: #555;
+            color: #888;
             letter-spacing: 0.5px;
         }
 
@@ -152,6 +152,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.8rem;
+            color: #666;
         }
 
         .spec-item p {
@@ -418,32 +419,25 @@
         
         .keyboard-assembly {
             position: absolute;
-            width: 480px;
-            height: 160px;
-            bottom: -148px;
-            left: -60px;
+            width: 360px;
+            height: 140px;
+            bottom: -118px;
             transform-style: preserve-3d;
             transform-origin: top center;
-            --kb-angle: 62deg;
-            transform: translateZ(120px) rotateX(var(--kb-angle));
-            --kb-thickness: 14px;
-            animation: kbFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes kbFloat {
-            0%,100% { transform: translateZ(120px) rotateX(62deg) translateY(0px); }
-            50%      { transform: translateZ(120px) rotateX(62deg) translateY(-6px); }
+            --kb-angle: 66deg;
+            transform: translateZ(164px) rotateX(var(--kb-angle));
+            --kb-thickness: 18px;
         }
 
         .kb-base {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(160deg, #F0EDE3 0%, #E4E0D5 100%);
-            border-radius: 12px;
+            background: var(--beige-main);
+            border-radius: 0;
             box-shadow: 
-                inset 1px 1px 3px rgba(255,255,255,0.7),
-                inset -3px -3px 8px rgba(0,0,0,0.08);
+                inset 1px 1px 2px rgba(255,255,255,0.5),
+                inset -5px -5px 15px rgba(0,0,0,0.1);
             transform: translateZ(calc(var(--kb-thickness) / 2));
             overflow: hidden;
         }
@@ -458,18 +452,18 @@
 
         .kb-front {
             bottom: 0;
-            background: linear-gradient(180deg, #cac6b8 0%, #b0ac9f 100%);
+            background: linear-gradient(180deg, #cdc9bb 0%, #b5b1a3 100%);
             transform-origin: bottom center;
             transform: translateZ(calc(var(--kb-thickness) / 2)) rotateX(90deg);
-            border-radius: 0 0 8px 8px;
+            border-radius: 0;
         }
 
         .kb-back {
             top: 0;
-            background: linear-gradient(180deg, #e8e4d8 0%, #d0ccbf 100%);
+            background: linear-gradient(180deg, #e5e1d4 0%, #c9c5b8 100%);
             transform-origin: top center;
             transform: translateZ(calc(var(--kb-thickness) / 2)) rotateX(-90deg);
-            border-radius: 8px 8px 0 0;
+            border-radius: 0;
         }
 
         .kb-left,
@@ -478,21 +472,21 @@
             top: 0;
             width: var(--kb-thickness);
             height: 100%;
-            background: linear-gradient(90deg, #d4d0c3 0%, #c0bcaf 100%);
+            background: linear-gradient(180deg, #d1cdbf 0%, #b7b3a6 100%);
         }
 
         .kb-left {
             left: 0;
             transform-origin: left center;
             transform: translateZ(calc(var(--kb-thickness) / 2)) rotateY(90deg);
-            border-radius: 8px 0 0 8px;
+            border-radius: 0;
         }
 
         .kb-right {
             right: 0;
             transform-origin: right center;
             transform: translateZ(calc(var(--kb-thickness) / 2)) rotateY(-90deg);
-            border-radius: 0 8px 8px 0;
+            border-radius: 0;
         }
 
         .kb-shadow {
@@ -505,31 +499,30 @@
             transform-origin: top center;
             transform: rotateX(calc(-90deg - var(--kb-angle))) translateZ(20px);
             box-shadow: 
-                0 50px 80px rgba(0,0,0,0.22),
-                0 20px 35px rgba(0,0,0,0.12);
+                0 40px 70px rgba(0,0,0,0.25),
+                0 20px 30px rgba(0,0,0,0.15);
             pointer-events: none;
             border-radius: 12px;
         }
 
         .keys-grid {
             display: grid;
-            grid-template-columns: repeat(14, 1fr);
-            gap: 4px;
-            padding: 10px 14px 8px;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 6px;
+            padding: 15px;
             transform: translateZ(8px);
             transform-style: preserve-3d;
         }
 
         .key {
-            height: 22px;
-            background: linear-gradient(180deg, #F5F2EC 0%, #E8E4DA 100%);
+            height: 27px;
+            background: #ECE8DA;
             border-radius: 4px;
             box-shadow: 
-                0 3px 0 #C2BEB3,
-                0 4px 5px rgba(0,0,0,0.14),
-                inset 0 1px 0 rgba(255,255,255,0.8);
-            transform: translateZ(1px) translateY(0);
-            border: 1px solid rgba(0,0,0,0.07);
+                0 6px 0 #C4C0B3,
+                0 8px 7px rgba(0,0,0,0.2);
+            transform: translateZ(1px);
+            transition: transform 0.05s;
         }
 
         .key.wide  { grid-column: span 2; }
@@ -537,48 +530,15 @@
         .key.space { grid-column: span 6; }
 
         @keyframes typeKey {
-            0%   { transform: translateZ(1px) translateY(0);   box-shadow: 0 3px 0 #C2BEB3, 0 4px 5px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.8); }
-            50%  { transform: translateZ(0px) translateY(3px); box-shadow: 0 0px 0 #C2BEB3, 0 1px 2px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.5); }
-            100% { transform: translateZ(1px) translateY(0);   box-shadow: 0 3px 0 #C2BEB3, 0 4px 5px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.8); }
+            0%, 100% { transform: translateZ(1px) translateY(0); box-shadow: 0 6px 0 #C4C0B3, 0 8px 7px rgba(0,0,0,0.2); }
+            50% { transform: translateZ(-2px) translateY(5px); box-shadow: 0 1px 0 #C4C0B3, 0 1px 2px rgba(0,0,0,0.05); }
         }
 
-        /* Smooth left-to-right wave */
-        .key:nth-child(1)  { animation: typeKey 3.8s ease-in-out infinite 0.00s; }
-        .key:nth-child(2)  { animation: typeKey 3.8s ease-in-out infinite 0.09s; }
-        .key:nth-child(3)  { animation: typeKey 3.8s ease-in-out infinite 0.18s; }
-        .key:nth-child(4)  { animation: typeKey 3.8s ease-in-out infinite 0.27s; }
-        .key:nth-child(5)  { animation: typeKey 3.8s ease-in-out infinite 0.36s; }
-        .key:nth-child(6)  { animation: typeKey 3.8s ease-in-out infinite 0.45s; }
-        .key:nth-child(7)  { animation: typeKey 3.8s ease-in-out infinite 0.54s; }
-        .key:nth-child(8)  { animation: typeKey 3.8s ease-in-out infinite 0.63s; }
-        .key:nth-child(9)  { animation: typeKey 3.8s ease-in-out infinite 0.72s; }
-        .key:nth-child(10) { animation: typeKey 3.8s ease-in-out infinite 0.81s; }
-        .key:nth-child(11) { animation: typeKey 3.8s ease-in-out infinite 0.90s; }
-        .key:nth-child(12) { animation: typeKey 3.8s ease-in-out infinite 0.99s; }
-        .key:nth-child(13) { animation: typeKey 3.8s ease-in-out infinite 1.08s; }
-        .key:nth-child(14) { animation: typeKey 3.8s ease-in-out infinite 1.17s; }
-        .key:nth-child(15) { animation: typeKey 3.8s ease-in-out infinite 1.26s; }
-        .key:nth-child(16) { animation: typeKey 3.8s ease-in-out infinite 1.35s; }
-        .key:nth-child(17) { animation: typeKey 3.8s ease-in-out infinite 1.44s; }
-        .key:nth-child(18) { animation: typeKey 3.8s ease-in-out infinite 1.53s; }
-        .key:nth-child(19) { animation: typeKey 3.8s ease-in-out infinite 1.62s; }
-        .key:nth-child(20) { animation: typeKey 3.8s ease-in-out infinite 1.71s; }
-        .key:nth-child(21) { animation: typeKey 3.8s ease-in-out infinite 1.80s; }
-        .key:nth-child(22) { animation: typeKey 3.8s ease-in-out infinite 1.89s; }
-        .key:nth-child(23) { animation: typeKey 3.8s ease-in-out infinite 1.98s; }
-        .key:nth-child(24) { animation: typeKey 3.8s ease-in-out infinite 2.07s; }
-        .key:nth-child(25) { animation: typeKey 3.8s ease-in-out infinite 2.16s; }
-        .key:nth-child(26) { animation: typeKey 3.8s ease-in-out infinite 2.25s; }
-        .key:nth-child(27) { animation: typeKey 3.8s ease-in-out infinite 2.34s; }
-        .key:nth-child(28) { animation: typeKey 3.8s ease-in-out infinite 2.43s; }
-        .key:nth-child(29) { animation: typeKey 3.8s ease-in-out infinite 2.52s; }
-        .key:nth-child(30) { animation: typeKey 3.8s ease-in-out infinite 2.61s; }
-        .key:nth-child(31) { animation: typeKey 3.8s ease-in-out infinite 2.70s; }
-        .key:nth-child(32) { animation: typeKey 3.8s ease-in-out infinite 2.79s; }
-        .key:nth-child(33) { animation: typeKey 3.8s ease-in-out infinite 2.88s; }
-        .key:nth-child(34) { animation: typeKey 3.8s ease-in-out infinite 2.97s; }
-        .key:nth-child(35) { animation: typeKey 3.8s ease-in-out infinite 3.06s; }
-        .key:nth-child(36) { animation: typeKey 3.8s ease-in-out infinite 3.15s; }
+        .key:nth-child(3n+1) { animation: typeKey 1.5s infinite 0.2s; }
+        .key:nth-child(7n)   { animation: typeKey 2.1s infinite 0.5s; }
+        .key:nth-child(2n+4) { animation: typeKey 1.8s infinite 0.9s; }
+        .key:nth-child(5n)   { animation: typeKey 2.5s infinite 1.2s; }
+        .key:nth-child(4n+2) { animation: typeKey 1.2s infinite 0s;   }
         
         .cursor {
             display: inline-block;
@@ -658,13 +618,13 @@
         
         .btn-outline {
             background: transparent;
-            color: var(--ink-black);
-            border: 2px solid var(--ink-black);
+            color: #f0ede0;
+            border: 2px solid #f0ede0;
             transition: all 0.2s ease;
         }
         .btn-outline:hover {
-            background: var(--ink-black);
-            color: #f4f1e6;
+            background: #f0ede0;
+            color: #0a0a0a;
         }
 
         /* ── Socials overlay page ── */
@@ -1179,26 +1139,16 @@
                             <div class="keys-grid" vid="83">
                                 
                             <div class="keys-grid" vid="83">
-                                <!-- Row 1: 14 small keys -->
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div>
-                                <!-- Row 2: tab + 13 keys -->
-                                <div class="key wide"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key wide"></div>
-                                <!-- Row 3: caps + keys + return -->
-                                <div class="key wide"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div>
-                                <div class="key wider"></div>
-                                <!-- Row 4: shift + spacebar + shift -->
-                                <div class="key wider"></div>
-                                <div class="key space"></div>
-                                <div class="key wide"></div>
-                                <div class="key"></div><div class="key"></div><div class="key"></div>
+                                
+                                <div class="key" vid="84"></div><div class="key" vid="85"></div><div class="key" vid="86"></div><div class="key" vid="87"></div>
+                                <div class="key" vid="88"></div><div class="key" vid="89"></div><div class="key" vid="90"></div><div class="key" vid="91"></div>
+                                <div class="key" vid="92"></div><div class="key" vid="93"></div><div class="key" vid="94"></div><div class="key" vid="95"></div>
+                                
+                                <div class="key wide" vid="96"></div><div class="key" vid="97"></div><div class="key" vid="98"></div><div class="key" vid="99"></div>
+                                <div class="key" vid="100"></div><div class="key" vid="101"></div><div class="key" vid="102"></div><div class="key" vid="103"></div>
+                                <div class="key" vid="104"></div><div class="key wide" vid="105"></div>
+                                
+                                <div class="key" vid="106"></div><div class="key" vid="107"></div><div class="key space" vid="108"></div><div class="key" vid="109"></div><div class="key" vid="110"></div><div class="key" vid="111"></div>
                             </div>
                         </div>
                         <div class="kb-front" vid="112"></div>
