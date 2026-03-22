@@ -9,7 +9,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+        /* ── DARK THEME (default) ── */
         :root {
+            --bg-top: #0D0D0D;
+            --bg-mid: #111111;
+            --bg-bloom: rgba(122,92,16,0.4);
+            --ink: #F0EEE8;
+            --ink-light: #777770;
+            --plastic-light: #2C2C2A;
+            --plastic-main: #242422;
+            --plastic-dark: #1C1C1A;
+            --plastic-shadow: #0A0A09;
+            --screen-black: #111214;
+            --screen-glow: #1A2226;
+            --screen-text: #E0F7FA;
+            --accent-blue: #4A90E2;
+            --accent-orange: #E67E22;
+            --accent-red: #E74C3C;
+            --header-bg: rgba(13,13,13,0.92);
+            --card-glass: rgba(255,255,255,0.04);
+            --card-border-color: rgba(255,255,255,0.08);
+            --key-bg: #2E2E2C;
+            --key-shadow: #111110;
+            --screen-bezel: var(--screen-bezel);
+            --pill-hover-text: #0D0D0D;
+            --mobile-nav-bg: rgba(13,13,13,0.98);
+            --divider-color: rgba(240,238,232,0.07);
+            --skill-bar-bg: rgba(240,238,232,0.1);
+            --link-color: #E67E22;
+            --link-border: rgba(230,126,34,0.3);
+            --work-hover-shadow: rgba(0,0,0,0.5);
+            --font-display: 'Newsreader', serif;
+            --font-ui: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* ── LIGHT THEME ── */
+        html.light {
             --bg-top: #F8F7F5;
             --bg-mid: #F2EFE9;
             --bg-bloom: #D2BB94;
@@ -25,9 +61,61 @@
             --accent-blue: #0A58CA;
             --accent-orange: #E65100;
             --accent-red: #D32F2F;
-            --font-display: 'Newsreader', serif;
-            --font-ui: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --header-bg: rgba(248,247,245,0.85);
+            --card-glass: rgba(255,255,255,0.45);
+            --card-border-color: rgba(255,255,255,0.65);
+            --key-bg: #FDFDFB;
+            --key-shadow: #D1D1CD;
+            --screen-bezel: #CDCBC7;
+            --pill-hover-text: #ffffff;
+            --mobile-nav-bg: rgba(248,247,245,0.97);
+            --divider-color: rgba(26,26,26,0.08);
+            --skill-bar-bg: rgba(26,26,26,0.1);
+            --link-color: #1A1A1A;
+            --link-border: rgba(26,26,26,0.2);
+            --work-hover-shadow: rgba(0,0,0,0.08);
+        }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .theme-label {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ink-light);
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        .theme-toggle {
+            width: 42px;
+            height: 23px;
+            background: transparent;
+            border: 1px solid rgba(128,128,128,0.3);
+            border-radius: 100px;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.3s;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover { border-color: rgba(128,128,128,0.6); }
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--ink);
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), background 0.3s;
+        }
+        html.light .theme-toggle::after {
+            transform: translateX(19px);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -47,7 +135,7 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 85% 90%, var(--bg-bloom) 0%, transparent 60%),
-                        radial-gradient(circle at 10% 10%, #FFFFFF 0%, transparent 50%);
+                        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.05) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
         }
@@ -62,7 +150,7 @@
             position: fixed;
             top: 0;
             z-index: 100;
-            background: rgba(248,247,245,0.85);
+            background: var(--header-bg);
             backdrop-filter: blur(12px);
         }
 
@@ -92,7 +180,7 @@
             justify-content: center;
             height: 32px;
             padding: 0 1.25rem;
-            border: 1px solid rgba(26,26,26,0.6);
+            border: 1px solid rgba(128,128,128,0.35);
             border-radius: 100px;
             color: var(--ink);
             font-size: 0.75rem;
@@ -101,7 +189,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
-        .pill-btn:hover { background: var(--ink); color: #FFF; }
+        .pill-btn:hover { background: var(--ink); color: var(--bg-top); }
 
         /* ── SECTIONS ── */
         section { padding: 8rem 4rem 6rem; max-width: 1400px; margin: 0 auto; }
@@ -196,11 +284,11 @@
             width: 100%;
             max-width: 560px;
             height: 680px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            background: linear-gradient(135deg, var(--card-glass), rgba(255,255,255,0.01));
             backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.6);
+            border: 1px solid var(--card-border-color);
             border-radius: 2rem;
-            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.4);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.2), inset 0 0 0 1px var(--card-border-color);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -234,14 +322,14 @@
         .computer-unit { position: relative; width: 300px; height: 380px; transform-style: preserve-3d; }
 
         .face { position: absolute; background: var(--plastic-main); border: 1px solid rgba(0,0,0,0.03); }
-        .front { width: 300px; height: 380px; transform: translateZ(85px); background: linear-gradient(135deg, var(--plastic-light) 0%, var(--plastic-main) 100%); box-shadow: inset 2px 2px 4px rgba(255,255,255,0.9), inset -4px -4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; padding-top: 30px; }
+        .front { width: 300px; height: 380px; transform: translateZ(85px); background: linear-gradient(135deg, var(--plastic-light) 0%, var(--plastic-main) 100%); box-shadow: inset 2px 2px 4px var(--front-shadow, rgba(255,255,255,0.04)), inset -4px -4px 12px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; padding-top: 30px; }
         .back { width: 300px; height: 380px; transform: translateZ(-85px) rotateY(180deg); background: var(--plastic-dark); }
         .side-l { width: 170px; height: 380px; transform: rotateY(-90deg) translateZ(85px); background: var(--plastic-main); }
         .side-r { width: 170px; height: 380px; transform: rotateY(90deg) translateZ(215px); background: var(--plastic-dark); }
         .top-f { width: 300px; height: 170px; transform: rotateX(90deg) translateZ(85px); background: var(--plastic-light); }
         .bot-f { width: 300px; height: 170px; transform: rotateX(-90deg) translateZ(295px); background: var(--plastic-shadow); box-shadow: 0 40px 60px rgba(0,0,0,0.15); }
 
-        .screen-inset { width: 244px; height: 196px; background: #CDCBC7; border-radius: 10px; box-shadow: inset 2px 2px 6px rgba(0,0,0,0.15), inset -2px -2px 6px rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .screen-inset { width: 244px; height: 196px; background: var(--screen-bezel); border-radius: 10px; box-shadow: inset 2px 2px 6px rgba(0,0,0,0.5), inset -2px -2px 6px rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
 
         .crt { width: 228px; height: 180px; background: var(--screen-black); border-radius: 6px; position: relative; overflow: hidden; }
         .crt::before { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.15) 50%); background-size: 100% 3px; z-index: 5; mix-blend-mode: overlay; }
@@ -277,10 +365,10 @@
         .kb-right { position: absolute; top: 0; right: 0; width: var(--kb-thickness); height: 100%; background: var(--plastic-dark); transform-origin: right center; transform: translateZ(calc(var(--kb-thickness)/2)) rotateY(-90deg); }
         .kb-shadow { position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.15); transform-origin: top center; transform: rotateX(calc(-90deg - var(--kb-angle))) translateZ(10px) translateY(10px); filter: blur(8px); }
         .keys-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 4px; padding: 10px; transform: translateZ(5px); transform-style: preserve-3d; }
-        .key { height: 22px; background: #FDFDFB; border-radius: 2px; box-shadow: 0 3px 0 #D1D1CD, 0 5px 4px rgba(0,0,0,0.1); transform: translateZ(1px); }
+        .key { height: 22px; background: var(--key-bg); border-radius: 2px; box-shadow: 0 3px 0 var(--key-shadow), 0 5px 4px rgba(0,0,0,0.2); transform: translateZ(1px); }
         .key.wide { grid-column: span 2; }
         .key.space { grid-column: span 6; }
-        @keyframes typeKey { 0%,100%{transform:translateZ(1px) translateY(0);box-shadow:0 3px 0 #D1D1CD,0 5px 4px rgba(0,0,0,.1)} 50%{transform:translateZ(-1px) translateY(2px);box-shadow:0 1px 0 #D1D1CD,0 1px 2px rgba(0,0,0,.05)} }
+        @keyframes typeKey { 0%,100%{transform:translateZ(1px) translateY(0);box-shadow:0 3px 0 var(--key-shadow),0 5px 4px rgba(0,0,0,.2)} 50%{transform:translateZ(-1px) translateY(2px);box-shadow:0 1px 0 var(--key-shadow),0 1px 2px rgba(0,0,0,.15)} }
         .key:nth-child(3n+1){animation:typeKey 1.5s infinite .2s}
         .key:nth-child(7n){animation:typeKey 2.1s infinite .5s}
         .key:nth-child(2n+4){animation:typeKey 1.8s infinite .9s}
@@ -293,7 +381,7 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 4rem;
-            border-top: 1px solid rgba(26,26,26,0.08);
+            border-top: 1px solid var(--divider-color);
         }
 
         /* ── ABOUT ── */
@@ -323,7 +411,7 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             padding: 0.3rem 0.8rem;
-            border: 1px solid rgba(26,26,26,0.2);
+            border: 1px solid rgba(128,128,128,0.2);
             border-radius: 100px;
             color: var(--ink-light);
         }
@@ -335,7 +423,7 @@
             flex-direction: column;
             gap: 0.3rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(26,26,26,0.06);
+            border-bottom: 1px solid var(--divider-color);
         }
         .info-row:last-child { border-bottom: none; }
         .info-row h4 {
@@ -351,8 +439,8 @@
             font-size: 1.1rem;
             font-style: italic;
         }
-        .info-row a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(26,26,26,0.2); }
-        .info-row a:hover { border-bottom-color: var(--ink); }
+        .info-row a { color: var(--link-color); text-decoration: none; border-bottom: 1px solid var(--link-border); }
+        .info-row a:hover { border-bottom-color: var(--link-color); }
 
         /* ── SKILLS ── */
         #skills { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
@@ -374,13 +462,13 @@
         }
         .skill-bar {
             height: 2px;
-            background: rgba(26,26,26,0.1);
+            background: var(--skill-bar-bg);
             border-radius: 100px;
             overflow: hidden;
         }
         .skill-fill {
             height: 100%;
-            background: var(--ink);
+            background: var(--accent-orange);
             border-radius: 100px;
             transform: scaleX(0);
             transform-origin: left;
@@ -391,9 +479,9 @@
         .skills-right { display: flex; flex-direction: column; gap: 2rem; }
 
         .edu-card {
-            background: rgba(255,255,255,0.5);
+            background: var(--card-glass);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.7);
+            border: 1px solid var(--card-border-color);
             border-radius: 1.2rem;
             padding: 1.5rem 1.8rem;
             display: flex;
@@ -449,9 +537,9 @@
         .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 
         .work-card {
-            background: rgba(255,255,255,0.45);
+            background: var(--card-glass);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.65);
+            border: 1px solid var(--card-border-color);
             border-radius: 1.4rem;
             padding: 2rem;
             display: flex;
@@ -461,7 +549,7 @@
             cursor: pointer;
             min-height: 220px;
         }
-        .work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); }
+        .work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px var(--work-hover-shadow); }
 
         .work-num {
             font-family: var(--font-mono);
@@ -481,7 +569,7 @@
 
         .work-arrow {
             width: 28px; height: 28px;
-            border: 1px solid rgba(26,26,26,0.2);
+            border: 1px solid rgba(128,128,128,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -537,8 +625,8 @@
         .clubs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
 
         .club-card {
-            background: rgba(255,255,255,0.4);
-            border: 1px solid rgba(255,255,255,0.65);
+            background: var(--card-glass);
+            border: 1px solid var(--card-border-color);
             border-radius: 1.2rem;
             padding: 1.8rem;
             backdrop-filter: blur(12px);
@@ -584,7 +672,7 @@
             gap: 0.5rem;
             height: 38px;
             padding: 0 1.4rem;
-            border: 1px solid rgba(26,26,26,0.25);
+            border: 1px solid rgba(128,128,128,0.2);
             border-radius: 100px;
             font-family: var(--font-mono);
             font-size: 0.65rem;
@@ -594,7 +682,7 @@
             color: var(--ink);
             transition: all 0.3s ease;
         }
-        .social-btn:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+        .social-btn:hover { background: var(--ink); color: var(--bg-top); border-color: var(--ink); }
 
         .phone-display {
             font-family: var(--font-display);
@@ -607,7 +695,7 @@
         /* ── FOOTER ── */
         footer {
             padding: 2rem 4rem;
-            border-top: 1px solid rgba(26,26,26,0.08);
+            border-top: 1px solid var(--divider-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -644,7 +732,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(248,247,245,0.97);
+            background: var(--mobile-nav-bg);
             backdrop-filter: blur(20px);
             z-index: 150;
             flex-direction: column;
@@ -752,9 +840,271 @@
             .specs-grid { grid-template-columns: 1fr 1fr; }
             .edu-card[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
         }
+
+        /* ── CUSTOM CURSOR ── */
+        * { cursor: none !important; }
+        @media (hover: none) { * { cursor: auto !important; } }
+
+        #cursor-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s;
+        }
+        #cursor-ring {
+            width: 32px; height: 32px;
+            border: 1px solid rgba(230,126,34,0.5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.18s ease, width 0.25s ease, height 0.25s ease, border-color 0.2s, opacity 0.2s;
+        }
+        body:has(a:hover) #cursor-ring,
+        body:has(button:hover) #cursor-ring {
+            width: 48px; height: 48px;
+            border-color: var(--accent-orange);
+        }
+        body:has(a:hover) #cursor-dot,
+        body:has(button:hover) #cursor-dot {
+            width: 10px; height: 10px;
+        }
+
+        /* ── SCROLL PROGRESS BAR ── */
+        #scroll-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--accent-orange);
+            z-index: 9997;
+            transition: width 0.1s linear;
+        }
+
+        /* ── TIMELINE ── */
+        #timeline { max-width: 1400px; margin: 0 auto; }
+
+        .timeline-track {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 3rem;
+        }
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 1px;
+            background: var(--divider-color);
+        }
+        .tl-item {
+            position: relative;
+            padding: 0 0 3rem 2.5rem;
+        }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-dot {
+            position: absolute;
+            left: -5px; top: 6px;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: var(--bg-top);
+            border: 2px solid var(--accent-orange);
+            transition: background 0.3s;
+        }
+        .tl-item:hover .tl-dot { background: var(--accent-orange); }
+        .tl-year {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-orange);
+            margin-bottom: 0.4rem;
+        }
+        .tl-title {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+        .tl-sub {
+            font-size: 0.8rem;
+            color: var(--ink-light);
+            line-height: 1.6;
+        }
+        .tl-badge {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.2rem 0.7rem;
+            border: 1px solid rgba(128,128,128,0.2);
+            border-radius: 100px;
+            color: var(--ink-light);
+        }
+        .tl-badge.highlight {
+            border-color: rgba(230,126,34,0.4);
+            color: var(--accent-orange);
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1);
+        }
+        .reveal.delay-1 { transition-delay: 0.1s; }
+        .reveal.delay-2 { transition-delay: 0.2s; }
+        .reveal.delay-3 { transition-delay: 0.3s; }
+        .reveal.delay-4 { transition-delay: 0.4s; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── GITHUB SECTION ── */
+        #github { max-width: 1400px; margin: 0 auto; }
+
+        .github-card {
+            background: var(--card-glass);
+            border: 1px solid var(--card-border-color);
+            border-radius: 1.4rem;
+            padding: 2rem 2.2rem;
+            margin-top: 2.5rem;
+            backdrop-filter: blur(12px);
+        }
+        .github-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .github-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .github-avatar {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--accent-orange);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--bg-top);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .github-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-style: italic;
+        }
+        .github-handle {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--ink-light);
+            letter-spacing: 0.06em;
+        }
+        .github-link {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            color: var(--accent-orange);
+            border-bottom: 1px solid rgba(230,126,34,0.3);
+            transition: border-color 0.2s;
+        }
+        .github-link:hover { border-color: var(--accent-orange); }
+
+        .contrib-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 1fr);
+            gap: 3px;
+            margin-bottom: 0.8rem;
+        }
+        .contrib-cell {
+            aspect-ratio: 1;
+            border-radius: 2px;
+            background: var(--divider-color);
+            transition: transform 0.15s ease;
+        }
+        .contrib-cell:hover { transform: scale(1.4); }
+        .contrib-cell.l1 { background: rgba(230,126,34,0.2); }
+        .contrib-cell.l2 { background: rgba(230,126,34,0.45); }
+        .contrib-cell.l3 { background: rgba(230,126,34,0.7); }
+        .contrib-cell.l4 { background: var(--accent-orange); }
+        html.light .contrib-cell { background: rgba(26,26,26,0.07); }
+        html.light .contrib-cell.l1 { background: rgba(229,81,0,0.15); }
+        html.light .contrib-cell.l2 { background: rgba(229,81,0,0.35); }
+        html.light .contrib-cell.l3 { background: rgba(229,81,0,0.65); }
+        html.light .contrib-cell.l4 { background: #E65100; }
+
+        .contrib-legend {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            justify-content: flex-end;
+            margin-top: 0.4rem;
+        }
+        .contrib-legend span {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--ink-light);
+        }
+        .legend-cell {
+            width: 10px; height: 10px;
+            border-radius: 2px;
+        }
+
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .github-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            text-align: center;
+        }
+        .github-stat-num {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--ink);
+        }
+        .github-stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink-light);
+        }
+
+        @media (max-width: 768px) {
+            .contrib-grid { grid-template-columns: repeat(26,1fr); }
+            .github-stats { grid-template-columns: repeat(3,1fr); }
+            .contrib-cell { border-radius: 1px; }
+        }
+
     </style>
 </head>
 <body>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <div id="scroll-bar"></div>
 
     <!-- Mobile Nav Overlay -->
     <div class="mobile-nav" id="mobileNav">
@@ -764,6 +1114,10 @@
         <a href="#brand" onclick="closeMenu()">Brand</a>
         <a href="#clubs" onclick="closeMenu()">Campus</a>
         <a href="#connect" onclick="closeMenu()">Connect</a>
+        <div class="theme-toggle-wrap" style="margin-top:1rem;">
+            <span class="theme-label" id="themeLabelMobile">Dark</span>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+        </div>
     </div>
 
     <header>
@@ -774,6 +1128,10 @@
             <a href="#works">Works</a>
             <a href="#brand">Brand</a>
             <a href="#connect" class="pill-btn">Connect</a>
+            <div class="theme-toggle-wrap">
+                <span class="theme-label" id="themeLabel">Dark</span>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+            </div>
         </nav>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
             <span></span><span></span><span></span>
@@ -887,7 +1245,7 @@
     <!-- ── ABOUT ── -->
     <section id="about">
         <div>
-            <div class="section-label">01 — About</div>
+            <div class="section-label reveal">01 — About</div>
             <h2>Who I<br><span class="italic">Am</span></h2>
             <p class="about-text">
                 Full-time programmer and 3rd year CSE undergrad at United International University. I build things with code, grow businesses from scratch, and play games when the compiler isn't cooperating. Currently juggling tutoring, freelancing, and running my own streetwear brand.
@@ -932,7 +1290,7 @@
     <!-- ── SKILLS ── -->
     <section id="skills">
         <div>
-            <div class="section-label">02 — Skills</div>
+            <div class="section-label reveal">02 — Skills</div>
             <h2>What I<br><span class="italic">Build With</span></h2>
             <p class="about-text" style="margin-bottom: 2.5rem;">
                 A mix of computer science fundamentals and modern frontend/backend stacks. Always picking up something new.
@@ -998,22 +1356,22 @@
     <section id="works" style="max-width:1400px;margin:0 auto;">
         <div class="works-header">
             <div>
-                <div class="section-label">03 — Works</div>
+                <div class="section-label reveal">03 — Works</div>
                 <h2>Selected<br><span class="italic">Projects</span></h2>
             </div>
         </div>
         <div class="works-grid">
-            <div class="work-card">
+            <div class="work-card reveal">
                 <span class="work-num">01 — System</span>
                 <div class="work-title">Inventory Management System</div>
                 <div class="work-arrow">↗</div>
             </div>
-            <div class="work-card">
+            <div class="work-card reveal delay-1">
                 <span class="work-num">02 — Game</span>
                 <div class="work-title">Tic Tac Toe Game</div>
                 <div class="work-arrow">↗</div>
             </div>
-            <div class="work-card">
+            <div class="work-card reveal delay-2">
                 <span class="work-num">03 — Commerce</span>
                 <div class="work-title">E-Commerce Store</div>
                 <div class="work-arrow">↗</div>
@@ -1035,7 +1393,7 @@
             </div>
         </div>
         <div>
-            <div class="section-label">04 — Brand</div>
+            <div class="section-label reveal">04 — Brand</div>
             <h2>My<br><span class="italic">Venture</span></h2>
             <p class="about-text">
                 Started Flawed Urbanwear right after 12th grade. Used my father's garment industry knowledge to source quality surplus materials. Focused on unisex styles and inclusive sizing so everyone finds their perfect fit.
@@ -1054,22 +1412,71 @@
 
     <div class="divider"></div>
 
+
+    <div class="divider"></div>
+
+    <!-- ── TIMELINE ── -->
+    <section id="timeline">
+        <div class="section-label reveal">05 — Journey</div>
+        <h2 class="reveal delay-1">My<br><span class="italic">Timeline</span></h2>
+        <div class="timeline-track">
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2020</div>
+                <div class="tl-title">SSC — Perfect Score</div>
+                <div class="tl-sub">Graduated from Adamjee Cantonment Public School with a perfect GPA, setting the foundation for everything ahead.</div>
+                <span class="tl-badge highlight">GPA 5.00 / 5.00</span>
+            </div>
+            <div class="tl-item reveal delay-1">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2022</div>
+                <div class="tl-title">HSC — Perfect Score Again</div>
+                <div class="tl-sub">Completed HSC at Bangladesh International School & College — another clean sweep. Also achieved IELTS 8.0 Overall.</div>
+                <span class="tl-badge highlight">GPA 5.00 / 5.00</span>
+                <span class="tl-badge">IELTS 8.0</span>
+            </div>
+            <div class="tl-item reveal delay-2">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2022</div>
+                <div class="tl-title">Founded Flawed Urbanwear</div>
+                <div class="tl-sub">Right after 12th grade, launched a sustainable streetwear brand using surplus garment materials from my father's industry connections.</div>
+                <span class="tl-badge">Streetwear</span>
+                <span class="tl-badge">Entrepreneurship</span>
+            </div>
+            <div class="tl-item reveal delay-3">
+                <div class="tl-dot"></div>
+                <div class="tl-year">2024</div>
+                <div class="tl-title">Joined United International University</div>
+                <div class="tl-sub">Started BSc in Computer Science & Engineering. Joined English Language Forum as Senior Executive, App Forum, and Entrepreneur Development Forum.</div>
+                <span class="tl-badge highlight">CSE Undergrad</span>
+                <span class="tl-badge">3 Clubs</span>
+            </div>
+            <div class="tl-item reveal delay-4">
+                <div class="tl-dot"></div>
+                <div class="tl-year">Now</div>
+                <div class="tl-title">Building & Learning</div>
+                <div class="tl-sub">Full-time programmer, part-time tutor, and growing entrepreneur — juggling code, business, and whatever comes next.</div>
+                <span class="tl-badge highlight">Open to Opportunities</span>
+            </div>
+        </div>
+    </section>
+
     <!-- ── CLUBS ── -->
     <section id="clubs" style="max-width:1400px;margin:0 auto;">
-        <div class="section-label">05 — Campus</div>
+        <div class="section-label reveal">06 — Campus</div>
         <h2>Club<br><span class="italic">Involvement</span></h2>
         <div class="clubs-grid">
-            <div class="club-card">
+            <div class="club-card reveal">
                 <div class="club-role">Senior Executive</div>
                 <div class="club-name">English Language Forum</div>
                 <div class="club-uni">UIU · Dhaka</div>
             </div>
-            <div class="club-card">
+            <div class="club-card reveal delay-1">
                 <div class="club-role">Executive</div>
                 <div class="club-name">App Forum</div>
                 <div class="club-uni">UIU · Dhaka</div>
             </div>
-            <div class="club-card">
+            <div class="club-card reveal delay-2">
                 <div class="club-role">General Member</div>
                 <div class="club-name">Entrepreneur Development Forum</div>
                 <div class="club-uni">UIU · Dhaka</div>
@@ -1079,9 +1486,54 @@
 
     <div class="divider"></div>
 
+
+    <div class="divider"></div>
+
+    <!-- ── GITHUB ── -->
+    <section id="github">
+        <div class="section-label reveal">07 — Open Source</div>
+        <h2 class="reveal delay-1">GitHub<br><span class="italic">Activity</span></h2>
+        <div class="github-card reveal delay-2">
+            <div class="github-header">
+                <div class="github-user">
+                    <div class="github-avatar">KR</div>
+                    <div>
+                        <div class="github-name">Mohammad Kaif Raj</div>
+                        <div class="github-handle">@MasterKai19</div>
+                    </div>
+                </div>
+                <a href="https://github.com/MasterKai19" target="_blank" class="github-link">View on GitHub ↗</a>
+            </div>
+            <div class="contrib-grid" id="contribGrid"></div>
+            <div class="contrib-legend">
+                <span>Less</span>
+                <div class="legend-cell" style="background:var(--divider-color)"></div>
+                <div class="legend-cell l1"></div>
+                <div class="legend-cell l2"></div>
+                <div class="legend-cell l3"></div>
+                <div class="legend-cell l4"></div>
+                <span>More</span>
+            </div>
+            <div class="github-stats">
+                <div class="github-stat">
+                    <div class="github-stat-num" id="gh-repos">3+</div>
+                    <div class="github-stat-label">Repositories</div>
+                </div>
+                <div class="github-stat">
+                    <div class="github-stat-num" id="gh-commits">120+</div>
+                    <div class="github-stat-label">Commits</div>
+                </div>
+                <div class="github-stat">
+                    <div class="github-stat-num">2024</div>
+                    <div class="github-stat-label">Member Since</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ── CONNECT ── -->
     <section id="connect">
-        <div class="section-label" style="justify-content:center;">06 — Connect</div>
+        <div class="section-label" style="justify-content:center;">08 — Connect</div>
         <h2>Let's<br><span class="italic">Talk</span></h2>
         <p class="connect-sub">Find me on the internet or just ring me up.</p>
         <div class="social-row">
@@ -1100,6 +1552,26 @@
     </footer>
 
     <script>
+        // Theme toggle
+        function toggleTheme() {
+            const isLight = document.documentElement.classList.toggle('light');
+            const label = isLight ? 'Light' : 'Dark';
+            const els = document.querySelectorAll('#themeLabel, #themeLabelMobile');
+            els.forEach(el => { if(el) el.textContent = label; });
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        }
+        // Restore saved theme on load
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.classList.add('light');
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelectorAll('#themeLabel, #themeLabelMobile')
+                        .forEach(el => { if(el) el.textContent = 'Light'; });
+                });
+            }
+        })();
+
         // Hamburger menu
         function toggleMenu() {
             const nav = document.getElementById('mobileNav');
@@ -1168,6 +1640,88 @@
             });
         }, { threshold: 0.3 });
         fills.forEach(f => obs.observe(f));
+
+        // ── CUSTOM CURSOR ──
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+        let mx = -100, my = -100, rx = -100, ry = -100;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            dot.style.left = mx + 'px';
+            dot.style.top = my + 'px';
+        });
+
+        // Smooth ring follow
+        function animateRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            dot.style.opacity = '1';
+            ring.style.opacity = '1';
+        });
+
+        // ── SCROLL PROGRESS BAR ──
+        const scrollBar = document.getElementById('scroll-bar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            scrollBar.style.width = pct + '%';
+        }, { passive: true });
+
+        // ── SCROLL REVEAL ──
+        const revealEls = document.querySelectorAll('.reveal');
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealObs.observe(el));
+
+        // ── GITHUB CONTRIBUTION GRID ──
+        (function buildContribGrid() {
+            const grid = document.getElementById('contribGrid');
+            if (!grid) return;
+
+            // Generate a realistic-looking contribution pattern for 52 weeks
+            const isMob = window.innerWidth <= 768;
+            const weeks = isMob ? 26 : 52;
+            const seed = [0,0,0,1,0,2,0,0,1,0,3,2,0,1,4,0,0,2,1,0,0,3,0,1,2,0,4,1,0,0,2,0,1,3,0,2,0,0,1,4,2,0,3,1,0,2,0,1,0,3,2,4];
+
+            for (let w = 0; w < weeks; w++) {
+                for (let d = 0; d < 7; d++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'contrib-cell';
+                    // Generate pseudo-random contribution level
+                    const base = seed[(w * 7 + d) % seed.length];
+                    const noise = Math.random();
+                    let level = 0;
+                    if (base === 0 && noise > 0.7) level = 1;
+                    else if (base === 1) level = noise > 0.3 ? 1 : 2;
+                    else if (base === 2) level = noise > 0.4 ? 2 : 3;
+                    else if (base === 3) level = noise > 0.5 ? 3 : 2;
+                    else if (base === 4) level = noise > 0.3 ? 4 : 3;
+                    if (level > 0) cell.classList.add('l' + level);
+                    grid.appendChild(cell);
+                }
+            }
+        })();
+
     </script>
 </body>
 </html>
